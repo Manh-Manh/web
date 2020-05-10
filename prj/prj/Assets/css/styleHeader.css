@@ -1,0 +1,29 @@
+﻿body {
+}
+.logo{
+    border: 1px solid red;
+}
+.menu{
+    right:0px;
+    border: 1px solid red;
+    float: right;
+    
+}
+ul.search{
+    border: 2px solid red;
+    
+
+}
+.search li{
+    text-decoration:none;
+    display:inline-block;
+    text-align:center;
+}
+.search li a{
+    text-decoration: none;
+
+}
+.menu li{
+    text-align:center;
+    display:inline-block;
+}
