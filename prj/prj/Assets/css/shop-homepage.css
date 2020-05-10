@@ -6,3 +6,38 @@
 body {
   padding-top: 56px;
 }
+
+.quickView {
+    background-color: blue;
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    z-index: 2;
+    color: white;
+    width: 90%;
+    margin: 0px auto;
+    padding: 15px;
+    text-align: center;
+    opacity: 0;
+    transition: 0.4s;
+}
+.imgPr {
+    position: relative;
+    transition: 0.4s;
+}
+
+    .imgPr img {
+        transform: scale(0.8);
+        transition: 0.4s;
+    }
+
+.card :hover .quickView {
+    opacity: 1;
+}
+
+.card :hover img {
+    transform: scale(1);
+}
+.quickView :hover .quickView{
+    color:red;
+}

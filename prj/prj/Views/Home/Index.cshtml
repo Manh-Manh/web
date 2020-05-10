@@ -57,14 +57,16 @@
                 {
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                            <a href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })" >
+                            <a class="imgPr" href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })" >
                                 <img class="card-img-top" src="~/Assets/images/products/@item.thumbnail.Trim()" alt=@item.thumbnail/>
-                 
+                                <div class="quickView">
+                                    Quick View
+                                </div>
                             </a>
                             
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">@item.productName</a>
+                                    <a href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })">@item.productName</a>
                                 </h4>
                                 <h5>@item.unitPrice</h5>
                                 <p class="card-text">@item.description.Substring(0,item.description.Length/3)...</p>
