@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿
 .logo{
     border: 1px solid red;
 }
@@ -26,4 +25,8 @@ ul.search{
 .menu li{
     text-align:center;
     display:inline-block;
+}
+.img-banner{
+    width: 100%;
+    height:300px;
 }

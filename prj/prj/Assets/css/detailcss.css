@@ -141,3 +141,6 @@
 .Detailimg{
     border: 1px solid #DDD;
 }
+#item-display{
+    transition: 0.4s;
+}

@@ -177,6 +177,9 @@
     <Content Include="Assets\css\detailcss.css" />
     <Content Include="Assets\css\shop-homepage.css" />
     <Content Include="Assets\css\styleHeader.css" />
+    <Content Include="Assets\images\banner\banner.jpg" />
+    <Content Include="Assets\images\banner\banner2.jpg" />
+    <Content Include="Assets\images\banner\banner3.jpg" />
     <Content Include="Assets\images\products\baume-et-mercier-capeland-chronograph-white-dial-watch-m0a10041.jpg" />
     <Content Include="Assets\images\products\baume-et-mercier-capeland-chronograph-white-dial-watch-m0a10041_3.jpg" />
     <Content Include="Assets\images\products\baume-et-mercier-capeland-chronograph-white-dial-watch-m0a10041_4.jpg" />
