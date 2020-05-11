@@ -26,5 +26,13 @@ namespace prj.Models.Dao
             return db.products.Find(productID);
             
         }
+        public IEnumerable<product> searchFor(string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return db.products.Where(n => n.productName.Contains(searchString)).OrderByDescending(n => n.productID).ToPagedList(1, 9);
+            }
+            else { return db.products.OrderByDescending(n => n.productID).ToPagedList(1, 9) ; }
+        }
     }
 }

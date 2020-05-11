@@ -10,12 +10,18 @@ namespace prj.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(int page=1, int pageSize=9)
+        public ActionResult Index(int page=1, int pageSize=9,string searchStr="")
         {
             var dao = new productDao();
             var model = dao.getAllProducts(page,pageSize);
+            if (String.IsNullOrEmpty(searchStr))
+            {
+                return View(model);
+            }
+            model = dao.searchFor(searchStr);
             return View(model);
         }
+        
 
         public ActionResult About()
         {
