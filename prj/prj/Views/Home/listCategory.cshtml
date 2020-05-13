@@ -1,0 +1,7 @@
+﻿@model List<prj.Models.category>
+    @foreach(var item in Model)
+    {
+        
+       <a href="@Url.Action("Index","Home",new { categoryID = item.categoryID })" class="list-group-item">@item.categoryName</a>
+        
+    }

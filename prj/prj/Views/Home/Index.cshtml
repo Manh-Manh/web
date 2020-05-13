@@ -4,6 +4,7 @@
 @using PagedList.Mvc
 @{
     ViewBag.Title = "Home Page";
+   
 }
 
 <div class="container">
@@ -14,9 +15,9 @@
 
             <h1 class="my-4">Shop Name</h1>
             <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
+                @{ 
+                    Html.RenderAction("listCategory", "Home");
+                }
             </div>
 
         </div>
@@ -86,7 +87,7 @@
 
             </div>
             <!-- /.row -->
-            @Html.PagedListPager(Model, page => Url.Action("Index",new { page }));
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page,@searchStr=ViewBag.searchString,@categoryID=ViewBag.categoryID }));
         </div>
         <!-- /.col-lg-9 -->
 

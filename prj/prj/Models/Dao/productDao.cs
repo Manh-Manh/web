@@ -16,17 +16,28 @@ namespace prj.Models.Dao
             db = new Database();
         }
         
-        public IEnumerable<product> getAllProducts(int page=1, int pageSize=9)
+        public IEnumerable<product> getAllProducts(int page,int pageSize,string searchString, string categoryID)
         {
-            
-            return db.products.OrderByDescending(n => n.productID).ToPagedList(page, pageSize);
+            searchString = searchString.Trim();
+            categoryID = categoryID.Trim();
+            var model = db.products.OrderByDescending(n => n.productID).ToPagedList(page, pageSize);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                model= db.products.Where(n => n.productName.Contains(searchString)).OrderByDescending(n => n.productID).ToPagedList(page, pageSize);
+            }
+            if (!String.IsNullOrEmpty(categoryID))
+            {
+                model = db.products.Where(n => n.categoryID.Equals(categoryID)).OrderBy(n => n.productID).ToPagedList(page, pageSize);
+            }
+            return model;
         }
         public product viewProductDetail(string productID)
         {
+            productID = productID.Trim();
             return db.products.Find(productID);
             
         }
-        public IEnumerable<product> searchFor(string searchString)
+        /*public IEnumerable<product> searchFor(string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -34,5 +45,15 @@ namespace prj.Models.Dao
             }
             else { return db.products.OrderByDescending(n => n.productID).ToPagedList(1, 9) ; }
         }
+        public IEnumerable<product> filterCategory(string categoryID)
+        {
+            categoryID = categoryID.Trim();
+            if (!String.IsNullOrEmpty(categoryID))
+            {
+                return db.products.Where(n => n.categoryID.Equals(categoryID)).OrderBy(n => n.productID).ToPagedList(1, 9);
+            }
+            else { return db.products.OrderBy(n => n.productID).ToPagedList(1, 9); }
+           
+        }*/
     }
 }

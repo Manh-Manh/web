@@ -10,15 +10,12 @@ namespace prj.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(int page=1, int pageSize=9,string searchStr="")
+        public ActionResult Index(int page=1, int pageSize=9,string searchStr="",string categoryID="")
         {
             var dao = new productDao();
-            var model = dao.getAllProducts(page,pageSize);
-            if (String.IsNullOrEmpty(searchStr))
-            {
-                return View(model);
-            }
-            model = dao.searchFor(searchStr);
+            var model = dao.getAllProducts(page,pageSize,searchStr,categoryID);
+            ViewBag.searchString = searchStr;
+            ViewBag.categoryID = categoryID;
             return View(model);
         }
         
@@ -44,8 +41,18 @@ namespace prj.Controllers
         public ActionResult ItemDetail(string prid="PRO0001")
         {
             var dao = new productDao();
+            var dao2 = new categoryDao();
             var model = dao.viewProductDetail(prid);
+            var lstCat = dao2.getAllCategory();
+            ViewBag.lstCat = lstCat;
             return View(model);
+        }
+        [ChildActionOnly]
+        public PartialViewResult listCategory()
+        {
+            var dao = new categoryDao();
+            var model = dao.getAllCategory();
+            return PartialView(model);
         }
 
     }
