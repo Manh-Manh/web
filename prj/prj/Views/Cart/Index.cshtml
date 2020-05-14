@@ -1,9 +1,13 @@
 ﻿@model List<prj.Models.CartItem>
+@using prj.Models.Dao;
+@using prj.Models;
+@using System.Web.Script.Serialization
 @{
     ViewBag.Title = "Index";
 }
-
+<script src="~/Assets/js/CartController.js"></script>
 <h2>Index</h2>
+
 <div class="container">
     <table id="cart" class="table table-hover table-condensed">
         <thead>
@@ -16,14 +20,12 @@
             </tr>
         </thead>
         <tbody>
-            @{
-                if (Model != null)
-                {
+            
+              
 
-
-
-                    foreach (var item in Model)
+                    @foreach (var item2 in Model)
                     {
+                        var item = new CartItem(new productDao().viewProductDetail(item2.Product.productID),item2.quantity);
                         <tr>
                             <td data-th="Product">
                                 <div class="row">
@@ -37,7 +39,7 @@
                             </td>
                             <td data-th="Price">@item.Product.unitPrice.Value.ToString("N0")</td>
                             <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" value="@item.quantity">
+                                <input type="number" data-id="@item.Product.productID" class="form-control text-center cart-item-quantity" value="@item.quantity">
                             </td>
                             <td data-th="Subtotal" class="text-center">
                                 
@@ -47,16 +49,16 @@
                                 <p>@subprice</p>
                             </td>
                             <td class="actions" data-th="">
-                                <button class="btn btn-info btn-sm"><i class="fa fa-refresh">Refresh</i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o">Delete</i></button>
+                                <button class="btn btn-info btn-sm cart-button-refresh" item-id="abc" data-id="@item.Product.productID" id="btn"><i class="fa fa-trash-o"> Refresh</i></button>
+                                <button class="btn btn-danger btn-sm cart-button-delete" data-id="@item.Product.productID"><i class="fa fa-trash-o">Delete</i></button>
                             </td>
                             
                                 
                             
                         </tr>
                         }
-                    }
-                }
+                    
+                
 
 
         </tbody>
@@ -65,7 +67,7 @@
                 <td class="text-center"><strong>Total 1.99</strong></td>
             </tr>
             <tr>
-                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                <td id="btn2"><a href="#" class="btn btn-warning" ><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
                 <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>

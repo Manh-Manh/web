@@ -5,6 +5,7 @@ using System.Web;
 using prj.Models;
 using System.Web.Mvc;
 using prj.Models.Dao;
+using System.Web.Script.Serialization;
 
 namespace prj.Controllers
 {
@@ -14,6 +15,7 @@ namespace prj.Controllers
         // GET: Cart
         public ActionResult Index()
         {
+           
             var cart = Session[CartSession];
             var list = new List<CartItem>();
 
@@ -22,7 +24,16 @@ namespace prj.Controllers
                 list = (List<CartItem>)cart;
 
             }
+
             return View(list);
+        }
+        public JsonResult Update(string JsonCart)
+        {
+
+            var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(JsonCart);
+            //var sessionCart = (List<CartItem>)Session[CartSession];
+            Session[CartSession] = (List<CartItem>)jsonCart;
+            return Json(new { status = true });
         }
         public ActionResult AddProduct(string productID, int quantity=1)
         {

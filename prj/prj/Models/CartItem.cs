@@ -6,6 +6,7 @@ using prj.Models;
 
 namespace prj.Models
 {
+    [Serializable]
     public class CartItem
     {
         public product Product { set; get; }
@@ -15,6 +16,10 @@ namespace prj.Models
         {
             this.Product = product;
             this.quantity = quantity;
+        }
+
+        public CartItem()
+        {
         }
     }
 }

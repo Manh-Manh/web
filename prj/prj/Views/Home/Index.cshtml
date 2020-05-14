@@ -1,7 +1,9 @@
 ﻿
 @model PagedList.IPagedList<prj.Models.product>
 @using PagedList;
-@using PagedList.Mvc
+@using PagedList.Mvc;
+@using prj.Models.Dao;
+
 @{
     ViewBag.Title = "Home Page";
    
@@ -52,30 +54,39 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
+            
+                @if(!String.IsNullOrEmpty(ViewBag.categoryID))
+                {
+                    var name = new categoryDao().getCategorybyID(ViewBag.categoryID);
+                    name = name.categoryName;
+                    <div> @name</div>
+                }
+            
             <div class="row">
-                @if(Model.Count==0)
+
+                @if (Model.Count == 0)
                 {
                     <h3>Không tìm thấy sản phẩm</h3>
                 }
-                else{
+                else
+                {
                     foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
-                                <a class="imgPr" href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })" >
-                                    <img class="card-img-top" src="~/Assets/images/products/@item.thumbnail.Trim()" alt=@item.thumbnail/>
+                                <a class="imgPr" href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })">
+                                    <img class="card-img-top" src="~/Assets/images/products/@item.thumbnail.Trim()" alt=@item.thumbnail />
                                     <div class="quickView">
                                         Quick View
                                     </div>
                                 </a>
-                            
+
                                 <div class="card-body">
                                     <h4 class="card-title">
                                         <a href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })">@item.productName</a>
                                     </h4>
                                     <h5>@item.unitPrice</h5>
-                                    <p class="card-text">@item.description.Substring(0,item.description.Length/3)...</p>
+                                    <p class="card-text">@item.description.Substring(0, item.description.Length / 3)...</p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -87,7 +98,7 @@
 
             </div>
             <!-- /.row -->
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page,@searchStr=ViewBag.searchString,@categoryID=ViewBag.categoryID }));
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchStr = ViewBag.searchString, @categoryID = ViewBag.categoryID }));
         </div>
         <!-- /.col-lg-9 -->
 

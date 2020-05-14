@@ -261,6 +261,7 @@
     <Content Include="Assets\js\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\js\bootstrap\js\bootstrap.js" />
     <Content Include="Assets\js\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\js\CartController.js" />
     <Content Include="Assets\js\jquery\jquery.js" />
     <Content Include="Assets\js\jquery\jquery.min.js" />
     <Content Include="Assets\js\jquery\jquery.slim.js" />

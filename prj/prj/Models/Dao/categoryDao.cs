@@ -17,5 +17,9 @@ namespace prj.Models.Dao
         {
             return db.categories.OrderByDescending(n => n.categoryID).ToList();
         }
+        public category getCategorybyID(string id)
+        {
+            return db.categories.Find(id);
+        }
     }
 }
