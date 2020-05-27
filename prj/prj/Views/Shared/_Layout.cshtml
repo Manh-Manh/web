@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using prj.Controllers;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -48,17 +49,39 @@
                         }
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Index","Cart")" class="glyphicon glyphicon-shopping-cart"></a>
+                        <a href="@Url.Action("Index","Cart")" class="glyphicon glyphicon-shopping-cart">
+                         
+                            
+                        </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            @{
+                                if (UserController.user != null && !String.IsNullOrEmpty(Session["User"].ToString()))
+                                {
+                                    <a class="dropdown-item" href="#">My Account</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+
+                                    if (UserController.user.status == 1)
+                                    {
+                                        <a class="dropdown-item" href="#">Admin</a>
+                                    }
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Logout</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("Login","User")">Login</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Register</a>
+
+                                }
+                            }
                         </div>
                     </li>
                 </ul>

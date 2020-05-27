@@ -156,8 +156,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -166,8 +169,11 @@
     <Compile Include="Models\customer.cs" />
     <Compile Include="Models\Dao\categoryDao.cs" />
     <Compile Include="Models\Dao\productDao.cs" />
+    <Compile Include="Models\Dao\SupplierDao.cs" />
+    <Compile Include="Models\Dao\UserDao.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\employee.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\order.cs" />
     <Compile Include="Models\orderdetail.cs" />
     <Compile Include="Models\product.cs" />
@@ -177,6 +183,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\admin\Assets\css\cssadmin.css" />
+    <Content Include="Assets\css\cssLogin.css" />
     <Content Include="Assets\css\detailcss.css" />
     <Content Include="Assets\css\shop-homepage.css" />
     <Content Include="Assets\css\styleHeader.css" />
@@ -291,6 +299,12 @@
     <Content Include="Assets\js\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Assets\js\jquery\jquery.min.map" />
     <Content Include="Assets\js\jquery\jquery.slim.min.map" />
+    <Content Include="Areas\admin\Views\web.config" />
+    <Content Include="Areas\admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Admin\Product.cshtml" />
+    <Content Include="Areas\admin\Views\Admin\Insert.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -319,9 +333,11 @@
     <Content Include="Views\Home\ItemDetail.cshtml" />
     <Content Include="Views\Home\listCategory.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\admin\Models\" />
     <Folder Include="Views\App_LocalResources\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>

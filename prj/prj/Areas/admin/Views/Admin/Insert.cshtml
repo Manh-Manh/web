@@ -1,0 +1,126 @@
+﻿@using prj.Models
+@using prj.Models.Dao
+@model prj.Models.product
+
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var supdao = new SupplierDao();
+    var listsup = supdao.getAllSupplier();
+    var catdao = new categoryDao();
+    var listcat = catdao.getAllCategory();
+}
+
+<h2>Insert</h2>
+
+@using (Html.BeginForm("Insert","Admin",FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="control-label col-md-2">Product Name</div>
+
+            <div class="col-md-10">
+                <input type="text" name="productName" />
+                @Html.ValidationMessageFor(model => model.productName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Supplier Name</div>
+            <div class="col-md-10">
+                <select class="" name="supplierID">
+                    @foreach (var item in listsup)
+                    {
+                        <option value="@item.supplierID">@item.companyName</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.supplierID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Category ID</div>
+            <div class="col-md-10">
+                <select class="" name="categoryID">
+                    @foreach (var item in listcat)
+                    {
+                        <option value="@item.categoryID">@item.categoryName</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.categoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Quantity</div>
+            <div class="col-md-10">
+                <input type="number" min="1" class="" value="1" name="quantity" />
+                @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Unit Price</div>
+            <div class="col-md-10">
+                <input class="" type="number" min="0" value="0" name="unitPrice"/>
+                @Html.ValidationMessageFor(model => model.unitPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Discount</div>
+            <div class="col-md-10">
+                <input class="" type="number" min="0" value="0" name="discount" />
+                @Html.ValidationMessageFor(model => model.discount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Status</div>
+            <div class="col-md-10">
+                <input class="" type="number" min="0" name="status" value="0" max="1" />
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Description</div>
+            <div class="col-md-10">
+                <textarea class="" name="description"></textarea>
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2"> Thumnail </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.thumbnail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.thumbnail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Image</div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -24,15 +24,33 @@ namespace prj.Controllers
                 list = (List<CartItem>)cart;
 
             }
-
+            ViewBag.total = "0";
             return View(list);
         }
         public JsonResult Update(string JsonCart)
         {
 
             var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(JsonCart);
+            
             //var sessionCart = (List<CartItem>)Session[CartSession];
             Session[CartSession] = (List<CartItem>)jsonCart;
+            return Json(new { status = true });
+        }
+        public JsonResult Delete(string JsonID)
+        {
+            var id = new JavaScriptSerializer().Deserialize<string>(JsonID);
+            var cart = (List<CartItem>)Session[CartSession];
+           
+            foreach(var item in cart)
+            {
+                if (item.Product.productID == id)
+                {
+                    cart.Remove(item);
+                    break;
+                }
+
+            }
+            Session[CartSession] = (List<CartItem>)cart;
             return Json(new { status = true });
         }
         public ActionResult AddProduct(string productID, int quantity=1)

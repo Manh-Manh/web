@@ -23,7 +23,7 @@ namespace prj.Models.Dao
             var model = db.products.OrderByDescending(n => n.productID).ToPagedList(page, pageSize);
             if (!String.IsNullOrEmpty(searchString))
             {
-                model= db.products.Where(n => n.productName.Contains(searchString)).OrderByDescending(n => n.productID).ToPagedList(page, pageSize);
+                model= db.products.Where(n => n.productName.Contains(searchString)).OrderBy(n => n.productID).ToPagedList(page, pageSize);
             }
             if (!String.IsNullOrEmpty(categoryID))
             {
@@ -55,5 +55,14 @@ namespace prj.Models.Dao
             else { return db.products.OrderBy(n => n.productID).ToPagedList(1, 9); }
            
         }*/
+        public string Insert(product pr)
+        {
+            
+            var prid = "PRO"+db.products.ToList().Count.ToString();
+            pr.productID = prid;
+            db.products.Add(pr);
+            db.SaveChanges();
+            return pr.productID.ToString();
+        }
     }
 }

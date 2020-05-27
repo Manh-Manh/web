@@ -6,7 +6,11 @@
 
 @{
     ViewBag.Title = "Home Page";
-   
+    try
+    {
+        <h1>@Session["User"]</h1>
+    }
+    catch(Exception e) { <h1>@e.ToString()</h1> }
 }
 
 <div class="container">
@@ -86,7 +90,17 @@
                                         <a href="@Url.Action("ItemDetail", "Home", new { prid = @item.productID })">@item.productName</a>
                                     </h4>
                                     <h5>@item.unitPrice</h5>
-                                    <p class="card-text">@item.description.Substring(0, item.description.Length / 3)...</p>
+                                    <p class="card-text">
+                                        @if (String.IsNullOrEmpty(item.description))
+                                        {
+                                            <span>Khong co thong tin</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.description.Substring(0, item.description.Length > 100 ? 100 : item.description.Length) ...</span>
+
+                                        }
+                                    </p>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -98,7 +112,7 @@
 
             </div>
             <!-- /.row -->
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchStr = ViewBag.searchString, @categoryID = ViewBag.categoryID }));
+            @Html.PagedListPager(Model, page => Url.Action("Product", new { page }));
         </div>
         <!-- /.col-lg-9 -->
 

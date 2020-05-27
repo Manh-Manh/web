@@ -1,0 +1,54 @@
+﻿@using prj.Models
+@using PagedList;
+@using PagedList.Mvc;
+@using prj.Models.Dao;
+
+@model PagedList.IPagedList<prj.Models.product>
+@{
+    /**/
+
+    ViewBag.Title = "Product";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Ảnh</th>
+            <th>Danh mục</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Chi tiết</th>
+            <th colspan="2">Hành động</th>
+           
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.productID</td>
+            <td>@item.productName</td>
+            <td><img src="~/Assets/images/products/@item.thumbnail.Trim()" /></td>
+            <td>@item.categoryID</td>
+            <td>@item.quantity</td>
+            <td>@item.unitPrice.Value.ToString("N0")</td>
+            <td>
+                @if (String.IsNullOrEmpty(item.description))
+                {
+                    <span>Khong co thong tin</span>
+                }else{
+                    <span>@item.description.Substring(0, item.description.Length > 50 ? 50 : item.description.Length) ...</span>
+                
+                }
+
+
+            </td>
+            <td><a href="#"><i>Edit</i></a></td>
+            <td><a href="#"><i>Delete</i></a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Product","Admin", new { page, @searchStr = "", @categoryID = "" }));
